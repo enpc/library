@@ -24,32 +24,34 @@ class SplitterServiceImplTest {
     private SplitterService splitterService;
 
     @Test
-    void parseChapter(){
+    void parseChapter() {
         final String chapterText = "Текст галвы 1";
 
-        final String testCase = "Глава №1\n" +
+        final String testCase = "Глава №1 \n\n" +
                 chapterText;
 
         var result = splitterService
-                .splitBook(new ByteArrayInputStream(testCase.getBytes()))
+                .splitBook(new ByteArrayInputStream(testCase.getBytes(StandardCharsets.UTF_8)))
                 .collect(Collectors.toList());
 
-        assertEquals(1,result.size());
+        assertEquals(1, result.size());
         assertEquals(1, result.get(0).getNumber());
         assertEquals(chapterText, result.get(0).getText());
     }
 
     @Test
-    void splitBook(){
-        final String testCase = "Глава №1\n" +
-                        "Текст галвы 1\n" +
-                        "Глава №2\n" +
-                        "Текст главы 2";
+    void splitBook() {
+        final String testCase = "Глава№1\n" +
+                "Текст галвы 1\n" +
+                " Глава №2 " +
+                "Текст главы 2" +
+                "   Глава      №3\n\n" +
+                "Текст главы 3";
 
         var result = splitterService
-                .splitBook(new ByteArrayInputStream(testCase.getBytes()))
+                .splitBook(new ByteArrayInputStream(testCase.getBytes(StandardCharsets.UTF_8)))
                 .collect(Collectors.toList());
 
-        assertEquals(2,result.size());
+        assertEquals(3, result.size());
     }
 }

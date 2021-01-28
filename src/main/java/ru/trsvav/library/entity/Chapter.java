@@ -15,8 +15,7 @@ public class Chapter {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-//    @ManyToOne
-    private Long book;
+    private String book;
 
     private Long chapterNumber;
 
