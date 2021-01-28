@@ -5,16 +5,15 @@ volumes:
   postgres:
 
 services:
-      postgres:
-        image: postgres
-        restart: unless-stopped
-        volumes:
-          - postgres:/var/lib/postgresql/data
-          - ./postgresinit.sql:/docker-entrypoint-initdb.d/init.sql
-        environment:
-          - POSTGRES_USER=root
-          - POSTGRES_PASSWORD=root
-
+    postgres:
+      image: postgres
+      restart: unless-stopped
+      volumes:
+        - postgres:/var/lib/postgresql/data
+        - ./postgresinit.sql:/docker-entrypoint-initdb.d/init.sql
+      environment:
+        - POSTGRES_USER=root
+        - POSTGRES_PASSWORD=root
 
     mongo:
         image: mongo
@@ -28,10 +27,12 @@ services:
             - MONGO_INITDB_ROOT_PASSWORD=root
 
     app:
-        image: library
+        image: library:0.0.1-SNAPSHOT
         ports:
           - 8080:8080
         links:
           - mongo
           - postgres    
         restart: unless-stopped
+        environment:
+          - JAVA_OPTS="-Xmx512m"
