@@ -2,10 +2,10 @@ package ru.trsvav.library.api.word.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
 import ru.trsvav.library.api.word.WordController;
-import ru.trsvav.library.api.word.response.WordCountResponse;
+import ru.trsvav.library.api.word.response.BookWordCountResponse;
+import ru.trsvav.library.api.word.response.ChapterWordCountResponse;
 import ru.trsvav.library.service.wordCount.WordCountService;
 
 import java.util.List;
@@ -20,18 +20,18 @@ public class WordControllerImpl implements WordController {
     private final ResponseMapper responseMapper;
 
     @Override
-    public ResponseEntity<List<WordCountResponse>> bookWordCount(String book, String word, int page, int size) {
+    public ResponseEntity<List<BookWordCountResponse>> bookWordCount(String book, String word, int page, int size) {
         return ResponseEntity.ok(
                 wordCountService.getBookWordCount(book, word, page, size).stream()
-                .map(responseMapper::wordCountToResponse)
+                .map(responseMapper::wordCountToBookResponse)
                 .collect(Collectors.toList())
         );
     }
 
     @Override
-    public ResponseEntity<WordCountResponse> chapterWordCount(String book, Long chapter, String word) {
+    public ResponseEntity<ChapterWordCountResponse> chapterWordCount(String book, Long chapter, String word) {
         return ResponseEntity.ok(
-                responseMapper.wordCountToResponse(
+                responseMapper.wordCountToChapterResponse(
                     wordCountService.getChapterWordCount(book,chapter,word)
                 )
         );

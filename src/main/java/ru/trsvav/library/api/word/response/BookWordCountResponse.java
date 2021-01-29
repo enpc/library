@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class WordCountResponse {
+public class BookWordCountResponse {
     private Long chapter;
     private String word;
     private Long count;
