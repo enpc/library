@@ -23,8 +23,8 @@ public class WordControllerImpl implements WordController {
     public ResponseEntity<List<BookWordCountResponse>> bookWordCount(String book, String word, int page, int size) {
         return ResponseEntity.ok(
                 wordCountService.getBookWordCount(book, word, page, size).stream()
-                .map(responseMapper::wordCountToBookResponse)
-                .collect(Collectors.toList())
+                        .map(responseMapper::wordCountToBookResponse)
+                        .collect(Collectors.toList())
         );
     }
 
@@ -32,7 +32,7 @@ public class WordControllerImpl implements WordController {
     public ResponseEntity<ChapterWordCountResponse> chapterWordCount(String book, Long chapter, String word) {
         return ResponseEntity.ok(
                 responseMapper.wordCountToChapterResponse(
-                    wordCountService.getChapterWordCount(book,chapter,word)
+                        wordCountService.getChapterWordCount(book, chapter, word)
                 )
         );
     }

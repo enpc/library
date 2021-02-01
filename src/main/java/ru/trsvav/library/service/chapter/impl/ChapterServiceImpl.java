@@ -4,13 +4,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.trsvav.library.common.batchColector.JpaBachInsertCollector;
 import ru.trsvav.library.entity.Chapter;
 import ru.trsvav.library.repository.ChapterRepository;
 import ru.trsvav.library.service.book.BookStorageService;
 import ru.trsvav.library.service.chapter.ChapterService;
-import ru.trsvav.library.service.chapter.exception.ChapterNotFoundException;
+import ru.trsvav.library.exceptions.ChapterNotFoundException;
 import ru.trsvav.library.service.splitter.SplitterService;
 
 import javax.persistence.EntityManagerFactory;
@@ -42,7 +41,7 @@ public class ChapterServiceImpl implements ChapterService {
                                     .build()
                     )
                     .collect(collector);
-        }catch (Exception e){
+        } catch (Exception e) {
             log.error(e);
             return 0L;
         }
@@ -51,7 +50,7 @@ public class ChapterServiceImpl implements ChapterService {
     @Override
     public Chapter getChapter(String book, Long chapterNumber) {
         return chapterRepository.findByBookAndChapterNumber(book, chapterNumber)
-                .orElseThrow(()->new ChapterNotFoundException("Chapter "+book+" "+chapterNumber+"not found"));
+                .orElseThrow(() -> new ChapterNotFoundException("Chapter " + book + " " + chapterNumber + "not found"));
     }
 
     @Override
