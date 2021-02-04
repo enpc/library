@@ -13,4 +13,5 @@ public interface ChapterService {
 
     Stream<Chapter> getAllChapters(String book, int page, int size);
 
+    Long chaptersCount(String book);
 }

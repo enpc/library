@@ -16,4 +16,6 @@ public interface ChapterRepository extends PagingAndSortingRepository<Chapter, L
     Optional<Chapter> findByBookAndChapterNumber(String book, Long chapterNumber);
 
     Stream<Chapter> findByBookOrderByChapterNumber(String book, Pageable pageable);
+
+    Long countByBook(String book);
 }

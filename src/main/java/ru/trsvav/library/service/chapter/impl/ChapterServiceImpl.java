@@ -57,4 +57,9 @@ public class ChapterServiceImpl implements ChapterService {
     public Stream<Chapter> getAllChapters(String book, int page, int size) {
         return chapterRepository.findByBookOrderByChapterNumber(book, PageRequest.of(page, size));
     }
+
+    @Override
+    public Long chaptersCount(String book) {
+        return chapterRepository.countByBook(book);
+    }
 }

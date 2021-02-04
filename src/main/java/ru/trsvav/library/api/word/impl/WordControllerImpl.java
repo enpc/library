@@ -2,6 +2,7 @@ package ru.trsvav.library.api.word.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import ru.trsvav.library.api.word.WordController;
 import ru.trsvav.library.api.word.response.BookWordCountResponse;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin
 @RequiredArgsConstructor
 public class WordControllerImpl implements WordController {
 

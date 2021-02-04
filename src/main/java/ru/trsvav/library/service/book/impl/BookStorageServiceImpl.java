@@ -10,6 +10,8 @@ import ru.trsvav.library.service.book.BookStorageService;
 import ru.trsvav.library.service.book.exceptions.FileNotFoundException;
 
 import java.io.InputStream;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -30,5 +32,16 @@ public class BookStorageServiceImpl implements BookStorageService {
         }
         var resource = gridFs.getResource(file);
         return resource.getContent();
+    }
+
+    @Override
+    public Set<String> getAllBooks() {
+        Set<String> result = new HashSet<>();
+
+        gridFs.find(new Query())
+                .map(file -> file.getFilename())
+                .into(result);
+
+        return result;
     }
 }

@@ -1,0 +1,21 @@
+plugins {
+    id("org.siouan.frontend-jdk11") version "5.0.0"
+    id 'java'
+}
+
+group = "ru.trsvav"
+version = "0.0.1-SNAPSHOT"
+
+frontend {
+    nodeVersion = '14.15.4'
+    assembleScript = 'run build'
+    cleanScript = 'run clean'
+   // checkScript = 'run check'
+}
+
+
+tasks.named("jar") {
+    dependsOn("assembleFrontend")
+    from("dist")
+    into("static")
+}
