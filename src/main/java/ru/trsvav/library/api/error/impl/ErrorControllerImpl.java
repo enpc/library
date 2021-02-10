@@ -3,7 +3,6 @@ package ru.trsvav.library.api.error.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.trsvav.library.api.error.ErrorController;
 import ru.trsvav.library.api.error.response.ErrorResponse;

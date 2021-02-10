@@ -52,7 +52,7 @@ public class BookControllerImpl implements BookController {
         var body = bookStorageService.getAllBooks().stream()
                 .map(bookName -> BookItemReponse.builder()
                         .name(bookName)
-                        .splited(chapterService.chaptersCount(bookName)>0)
+                        .splited(chapterService.chaptersCount(bookName) > 0)
                         .build()
                 ).collect(Collectors.toSet());
         return ResponseEntity.ok(body);

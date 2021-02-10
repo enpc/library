@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.stereotype.Service;
 import ru.trsvav.library.service.book.BookStorageService;
+import ru.trsvav.library.service.book.exceptions.FileAlreadyExistsException;
 import ru.trsvav.library.service.book.exceptions.FileNotFoundException;
 
 import java.io.InputStream;
@@ -21,6 +22,10 @@ public class BookStorageServiceImpl implements BookStorageService {
 
     @Override
     public void appendBook(String name, InputStream data) {
+        if (gridFs.findOne(new Query(Criteria.where("filename").is(name)))!=null){
+            throw new FileAlreadyExistsException("File "+name+" already exists.");
+        }
+
         gridFs.store(data, name);
     }
 
