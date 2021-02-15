@@ -17,7 +17,6 @@ import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
-@Log4j2
 public class ChapterServiceImpl implements ChapterService {
 
     private final BookStorageService bookStorageService;
@@ -41,9 +40,6 @@ public class ChapterServiceImpl implements ChapterService {
                                     .build()
                     )
                     .collect(collector);
-        } catch (Exception e) {
-            log.error(e);
-            return 0L;
         }
     }
 
